@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `library_db`.`rentals` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `withdrawal_date` DATETIME NOT NULL,
   `planned_date` DATE NOT NULL,
-  `ruterned_date` DATETIME NULL,
+  `returned_date` DATETIME NULL,
   `status` ENUM("emprestado", "devolvido", "atrasado", "perdido") NOT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NOT NULL,
