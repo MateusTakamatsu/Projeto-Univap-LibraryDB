@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema library_db
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema library_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `library_db` DEFAULT CHARACTER SET utf8 ;
+USE `library_db` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`clients`
+-- Table `library_db`.`clients`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`clients` (
+CREATE TABLE IF NOT EXISTS `library_db`.`clients` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `cpf` CHAR(11) NOT NULL,
@@ -39,9 +39,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`sessions`
+-- Table `library_db`.`sessions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`sessions` (
+CREATE TABLE IF NOT EXISTS `library_db`.`sessions` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `bookcase` INT NOT NULL,
   `starting_corridor` INT NULL,
@@ -53,9 +53,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`publishers`
+-- Table `library_db`.`publishers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`publishers` (
+CREATE TABLE IF NOT EXISTS `library_db`.`publishers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `description` VARCHAR(150) NOT NULL,
@@ -67,9 +67,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`employees`
+-- Table `library_db`.`employees`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`employees` (
+CREATE TABLE IF NOT EXISTS `library_db`.`employees` (
   `id` INT NOT NULL,
   `name` VARCHAR(50) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
@@ -85,9 +85,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`rentals`
+-- Table `library_db`.`rentals`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`rentals` (
+CREATE TABLE IF NOT EXISTS `library_db`.`rentals` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `withdrawal_date` DATETIME NOT NULL,
   `planned_date` DATE NOT NULL,
@@ -101,12 +101,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`rentals` (
   INDEX `fk_rentals_employees1_idx` (`employee_id` ASC) VISIBLE,
   CONSTRAINT `fk_rentals_clients`
     FOREIGN KEY (`client_id`)
-    REFERENCES `mydb`.`clients` (`id`)
+    REFERENCES `library_db`.`clients` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_rentals_employees1`
     FOREIGN KEY (`employee_id`)
-    REFERENCES `mydb`.`employees` (`id`)
+    REFERENCES `library_db`.`employees` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -114,9 +114,9 @@ DEFAULT CHARACTER SET = armscii8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`authors`
+-- Table `library_db`.`authors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`authors` (
+CREATE TABLE IF NOT EXISTS `library_db`.`authors` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `birthdate` DATE NULL,
@@ -129,9 +129,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`aliases`
+-- Table `library_db`.`aliases`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`aliases` (
+CREATE TABLE IF NOT EXISTS `library_db`.`aliases` (
   `id` INT NOT NULL,
   `name` VARCHAR(50) NOT NULL,
   `created_at` DATETIME NOT NULL,
@@ -141,16 +141,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`aliases` (
   INDEX `fk_aliases_authors1_idx` (`author_id` ASC) VISIBLE,
   CONSTRAINT `fk_aliases_authors1`
     FOREIGN KEY (`author_id`)
-    REFERENCES `mydb`.`authors` (`id`)
+    REFERENCES `library_db`.`authors` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`pieces`
+-- Table `library_db`.`pieces`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`pieces` (
+CREATE TABLE IF NOT EXISTS `library_db`.`pieces` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `tittle` VARCHAR(100) NOT NULL,
   `pages` INT NULL,
@@ -170,21 +170,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`pieces` (
   INDEX `fk_pieces_aliases1_idx` (`aliase_id` ASC) VISIBLE,
   CONSTRAINT `fk_pieces_publishers1`
     FOREIGN KEY (`publisher_id`)
-    REFERENCES `mydb`.`publishers` (`id`)
+    REFERENCES `library_db`.`publishers` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pieces_aliases1`
     FOREIGN KEY (`aliase_id`)
-    REFERENCES `mydb`.`aliases` (`id`)
+    REFERENCES `library_db`.`aliases` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`volumes`
+-- Table `library_db`.`volumes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`volumes` (
+CREATE TABLE IF NOT EXISTS `library_db`.`volumes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `bought_date` DATE NOT NULL,
   `status` ENUM("alocado", "perdido", "guardados", "não alocavel") NOT NULL,
@@ -199,21 +199,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`volumes` (
   INDEX `fk_volumn_session1_idx` (`session_id` ASC) VISIBLE,
   CONSTRAINT `fk_volumn_pieces1`
     FOREIGN KEY (`piece_id`)
-    REFERENCES `mydb`.`pieces` (`id`)
+    REFERENCES `library_db`.`pieces` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_volumn_session1`
     FOREIGN KEY (`session_id`)
-    REFERENCES `mydb`.`sessions` (`id`)
+    REFERENCES `library_db`.`sessions` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`volumes_rentals`
+-- Table `library_db`.`volumes_rentals`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`volumes_rentals` (
+CREATE TABLE IF NOT EXISTS `library_db`.`volumes_rentals` (
   `volume_id` INT NOT NULL,
   `rental_id` INT NOT NULL,
   PRIMARY KEY (`volume_id`, `rental_id`),
@@ -221,21 +221,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`volumes_rentals` (
   INDEX `fk_volumn_has_rentals_volumn1_idx` (`volume_id` ASC) VISIBLE,
   CONSTRAINT `fk_volumn_has_rentals_volumn1`
     FOREIGN KEY (`volume_id`)
-    REFERENCES `mydb`.`volumes` (`id`)
+    REFERENCES `library_db`.`volumes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_volumn_has_rentals_rentals1`
     FOREIGN KEY (`rental_id`)
-    REFERENCES `mydb`.`rentals` (`id`)
+    REFERENCES `library_db`.`rentals` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`returns`
+-- Table `library_db`.`returns`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`returns` (
+CREATE TABLE IF NOT EXISTS `library_db`.`returns` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `returned_date` DATETIME NULL,
   `rentals_id` INT NOT NULL,
@@ -245,12 +245,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`returns` (
   INDEX `fk_returns_employees1_idx` (`employees_id` ASC) VISIBLE,
   CONSTRAINT `fk_returns_rentals1`
     FOREIGN KEY (`rentals_id`)
-    REFERENCES `mydb`.`rentals` (`id`)
+    REFERENCES `library_db`.`rentals` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_returns_employees1`
     FOREIGN KEY (`employees_id`)
-    REFERENCES `mydb`.`employees` (`id`)
+    REFERENCES `library_db`.`employees` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
