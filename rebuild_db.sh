@@ -1,5 +1,14 @@
 # Script to drop, create and populate library_db
 
+# Requirements to use this script
+# 1. All of the following script files must be in the same directory;
+#	a. create.sql
+#	b. populate.sql
+#	c. each_row_count.sql
+#	d. rebuild_db.sh
+# 2. You must have a .my.cnf file in your home directory (~/)
+#	a. Example can be found at example.my.cnf
+
 action="$1"
 
 case $action in
@@ -19,7 +28,7 @@ case $action in
 		echo "Populating database..."
 		mariadb library_db < ./populate.sql
 		echo "Showing result..."
-		mariadb library_db -e "SELECT * FROM volumes_rentals;"
+		mariadb library_db -e "SELECT * from returns;"
 		;;
 	count)
 		echo "Counting rows of each table..."

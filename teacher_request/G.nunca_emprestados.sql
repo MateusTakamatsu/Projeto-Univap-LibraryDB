@@ -1,4 +1,4 @@
-SELECT p.tittle as titulo
+SELECT p.title as titulo
 FROM pieces p 
 JOIN volumes v ON v.piece_id = p.id 
 LEFT JOIN volumes_rentals vr  ON vr.volume_id = v.id

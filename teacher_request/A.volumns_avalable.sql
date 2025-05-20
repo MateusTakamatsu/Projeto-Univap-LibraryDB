@@ -1,4 +1,4 @@
-SELECT p.tittle as titulo, COUNT(v.id) as quantidade
+SELECT p.title as titulo, COUNT(v.id) as quantidade
 FROM volumes v
 JOIN pieces p ON p.id = v.piece_id
 where v.status = 'guardados'
