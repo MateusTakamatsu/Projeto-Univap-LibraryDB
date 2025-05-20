@@ -42,7 +42,7 @@ INSERT INTO `library_db`.`sessions` (`bookcase`, `starting_corridor`, `ending_co
 (9, 81, 90, NOW(), NOW()),
 (10, 91, 100, NOW(), NOW());
 
-INSERT INTO `library_db`.`publishers` (`name`, `description`, `fundation_year`, `created_at`, `updated_at`) VALUES
+INSERT INTO `library_db`.`publishers` (`name`, `description`, `foundation_year`, `created_at`, `updated_at`) VALUES
 ('Companhia das Letras', 'Uma das maiores editoras do Brasil, publica literatura nacional e estrangeira.', 1986, NOW(), NOW()),
 ('Record', 'Editora brasileira com catálogo diversificado incluindo ficção, não ficção e biografias.', 1942, NOW(), NOW()),
 ('Rocco', 'Famosa por publicar a saga Harry Potter no Brasil, atua em diversos gêneros.', 1975, NOW(), NOW()),
@@ -76,17 +76,17 @@ INSERT INTO `library_db`.`employees` (`id`, `name`, `email`, `role`, `cpf`, `pho
 (9, 'Roberta Almeida', 'roberta.almeida@empresa.com', 'Gerente', '90123456789', '11909876543', '/caminho/arquivo9.pdf', '90123456789', NOW(), NOW()),
 (10, 'Tiago Santos', 'tiago.santos@empresa.com', 'Supervisor', '01234567890', '11998765432', '/caminho/arquivo10.pdf', '01234567890', NOW(), NOW());
 
-INSERT INTO `library_db`.`rentals` (`withdrawal_date`, `planned_date`, `returned_date`, `status`, `created_at`, `updated_at`, `client_id`, `employee_id`) VALUES
-(NOW(), CURDATE() + INTERVAL 7 DAY, NULL, 'emprestado', NOW(), NOW(), 1, 1),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NOW(), 'devolvido', NOW(), NOW(), 2, 2),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NULL, 'atrasado', NOW(), NOW(), 3, 3),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NULL, 'perdido', NOW(), NOW(), 4, 4),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NOW(), 'devolvido', NOW(), NOW(), 5, 5),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NULL, 'emprestado', NOW(), NOW(), 6, 6),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NOW(), 'devolvido', NOW(), NOW(), 7, 7),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NULL, 'atrasado', NOW(), NOW(), 8, 8),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NULL, 'perdido', NOW(), NOW(), 9, 9),
-(NOW(), CURDATE() + INTERVAL 7 DAY, NOW(), 'devolvido', NOW(), NOW(), 10, 10);
+INSERT INTO `library_db`.`rentals` (`withdrawal_date`, `planned_date`, `status`, `created_at`, `updated_at`, `client_id`, `employee_id`) VALUES
+(NOW() - INTERVAL 1 DAY, CURDATE() + INTERVAL 6 DAY, 'emprestado', NOW(), NOW(), 1, 1),
+(NOW() - INTERVAL 5 DAY, CURDATE() + INTERVAL 2 DAY, 'devolvido', NOW(), NOW(), 2, 2),
+(NOW() - INTERVAL 8 DAY, CURDATE() - INTERVAL 1 DAY, 'atrasado', NOW(), NOW(), 3, 3),
+(NOW() - INTERVAL 13 DAY, CURDATE() - INTERVAL 6 DAY, 'perdido', NOW(), NOW(), 4, 4),
+(NOW() - INTERVAL 9 DAY, CURDATE() - INTERVAL 2 DAY, 'devolvido', NOW(), NOW(), 5, 5),
+(NOW() - INTERVAL 2 DAY, CURDATE() + INTERVAL 5 DAY, 'emprestado', NOW(), NOW(), 6, 6),
+(NOW() - INTERVAL 6 DAY, CURDATE() + INTERVAL 1 DAY, 'devolvido', NOW(), NOW(), 7, 7),
+(NOW() - INTERVAL 3 DAY, CURDATE() + INTERVAL 4 DAY, 'atrasado', NOW(), NOW(), 8, 8),
+(NOW() - INTERVAL 11 DAY, CURDATE() - INTERVAL 4 DAY, 'perdido', NOW(), NOW(), 9, 9),
+(NOW() - INTERVAL 10 DAY, CURDATE() - INTERVAL 3 DAY, 'devolvido', NOW(), NOW(), 10, 10);
 
 INSERT INTO `library_db`.`authors` (`name`, `birthdate`, `death_date`, `nationality`, `created_at`, `updated_at`) VALUES
 ('Machado de Assis', '1839-06-21', '1908-09-29', 'Brasileiro', NOW(), NOW()),
@@ -152,7 +152,7 @@ INSERT INTO `library_db`.`aliases` (`id`, `name`, `created_at`, `updated_at`, `a
 (29, 'T. S. Levy', NOW(), NOW(), 29),
 (30, 'M. Aquino', NOW(), NOW(), 30);
 
-INSERT INTO `library_db`.`pieces` (`tittle`, `pages`, `published_year`, `category`, `is_scanned`, `edition`, `isbn`, `languege`, `cover`, `created_at`, `updated_at`, `publisher_id`, `aliase_id`) VALUES
+INSERT INTO `library_db`.`pieces` (`title`, `pages`, `published_year`, `category`, `is_scanned`, `edition`, `isbn`, `language`, `cover`, `created_at`, `updated_at`, `publisher_id`, `alias_id`) VALUES
 ('Dom Casmurro', 256, 1899, 'Romance', b'1', '1ª Edição', '9788535914849', 'pt-BR', 'Hardcover', NOW(), NOW(), 1, 1),
 ('A Hora da Estrela', 96, 1977, 'Drama', b'1', '2ª Edição', '9788535915242', 'pt-BR', 'Softcover', NOW(), NOW(), 2, 2),
 ('Capitães da Areia', 272, 1937, 'Ficção', b'0', '3ª Edição', '9788520926423', 'pt-BR', 'Dustjacket', NOW(), NOW(), 3, 3),
@@ -744,3 +744,9 @@ INSERT INTO `library_db`.`volumes_rentals` (`volume_id`, `rental_id`) VALUES
 (8, 8),
 (9, 9),
 (10, 10);
+
+INSERT INTO `library_db`.`returns` (`returned_date`, `rentals_id`, `employees_id`) VALUES
+(CURDATE(), 2, 1),
+(CURDATE() - INTERVAL 2 DAY, 5, 4),
+(CURDATE(), 7, 8),
+(CURDATE() - INTERVAL 1 DAY, 10, 10);
