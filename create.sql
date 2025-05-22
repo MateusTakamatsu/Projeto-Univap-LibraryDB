@@ -182,6 +182,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `library_db`.`volumes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `bought_date` DATE NOT NULL,
+  `status` ENUM("alocado", "perdido", "guardado", "não alocável") NOT NULL,
   `printing_year` SMALLINT UNSIGNED NOT NULL,
   `condition` ENUM("Novo", "Boas condições", "Parcialmente danificado", "Danificado", "impréstimo inviável") NOT NULL,
   `created_at` DATETIME NOT NULL,
@@ -232,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `library_db`.`returns` (
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NOT NULL,
   `rentals_id` INT NOT NULL,
-  `employees_id` INT NOT NULL,
+  `employee_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_returns_rentals1`
     FOREIGN KEY (`rentals_id`)
@@ -240,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `library_db`.`returns` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_returns_employees1`
-    FOREIGN KEY (`employees_id`)
+    FOREIGN KEY (`employee_id`)
     REFERENCES `library_db`.`employees` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
