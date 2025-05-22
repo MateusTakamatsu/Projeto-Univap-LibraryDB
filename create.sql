@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `library_db`.`pieces` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
   `pages` INT NULL,
-  `published_year` SMALLINT NOT NULL,
+  `published_year` SMALLINT UNSIGNED NOT NULL,
   `category` VARCHAR(20) NOT NULL,
   `is_scanned` BINARY(1) NULL,
   `edition` VARCHAR(50) NULL,
@@ -182,7 +182,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `library_db`.`volumes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `bought_date` DATE NOT NULL,
-  `printing_year` SMALLINT NOT NULL,
+  `printing_year` SMALLINT UNSIGNED NOT NULL,
   `condition` ENUM("Novo", "Boas condições", "Parcialmente danificado", "Danificado", "impréstimo inviável") NOT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NOT NULL,
