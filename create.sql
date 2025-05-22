@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `library_db`.`returns` (
   `employee_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_returns_rentals1`
-    FOREIGN KEY (`rentals_id`)
+    FOREIGN KEY (`rental_id`)
     REFERENCES `library_db`.`rentals` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
