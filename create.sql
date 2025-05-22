@@ -91,7 +91,6 @@ CREATE TABLE IF NOT EXISTS `library_db`.`rentals` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `withdrawal_date` DATETIME NOT NULL,
   `planned_date` DATE NOT NULL,
-  `status` ENUM("emprestado", "devolvido", "atrasado", "perdido") NOT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NOT NULL,
   `client_id` INT NOT NULL,
@@ -182,6 +181,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `library_db`.`volumes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `bought_date` DATE NOT NULL,
+  `status` ENUM("alocado", "perdido", "guardado", "nao alocavel"),
   `printing_year` SMALLINT UNSIGNED NOT NULL,
   `condition` ENUM("Novo", "Boas condições", "Parcialmente danificado", "Danificado", "impréstimo inviável") NOT NULL,
   `created_at` DATETIME NOT NULL,
