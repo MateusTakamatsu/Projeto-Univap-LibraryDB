@@ -2060,7 +2060,7 @@ INSERT INTO `library_db`.`volumes_rentals` (`volume_id`, `rental_id`, `status`) 
 (9, 9, 'emprestado'),
 (10, 10, 'devolvido');
 
-INSERT INTO `library_db`.`returns` (`returned_date`, `rentals_id`, `employees_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `library_db`.`returns` (`returned_date`, `rental_id`, `employee_id`, `created_at`, `updated_at`) VALUES
 (CURDATE(), 2, 1, NOW(), NOW()),
 (CURDATE() - INTERVAL 2 DAY, 5, 4, NOW(), NOW()),
 (CURDATE(), 7, 8, NOW(), NOW()),
