@@ -42,6 +42,8 @@ for i in vargas:
         numVol = random.randint(1,499)
         while numVol in numsVol:
             numVol = random.randint(1,499)
+        if numVol in [327,128,129,255,7,27]:
+            numVol = random.randint(1,499)
         nova_linha = f"({numVol}, {i['id']}, '{status}'),"
         linhas_sql.append(nova_linha)
         numsVol.append(numVol)
